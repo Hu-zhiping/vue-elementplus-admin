@@ -1,19 +1,20 @@
 <template>
-	<div>
-		<el-container>
-			<el-aside>
-				<Menu></Menu>
-			</el-aside>
-			<el-container>
-				<el-header> header </el-header>
-				<el-main> main </el-main>
-			</el-container>
-		</el-container>
+	<div class="h-full flex">
+		<div class="h-full w-200">
+			<Sidebar></Sidebar>
+		</div>
+
+		<div class="flex flex-col flex-1">
+			<Header />
+			<Appmain />
+		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import Menu from "./ components/Menu/index.vue";
+import Header from "./ components/header.vue";
+import Appmain from "./ components/appmain.vue";
+import Sidebar from "./ components/sidebar.vue";
 </script>
 
 <style lang="scss" scoped></style>

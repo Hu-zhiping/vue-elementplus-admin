@@ -3,7 +3,8 @@ module.exports = {
 	env: {
 		browser: true,
 		node: true,
-		es6: true
+		es6: true,
+		"vue/setup-compiler-macros":true
 	},
 	parser: "vue-eslint-parser",
 	parserOptions: {
@@ -17,7 +18,7 @@ module.exports = {
 	},
 
 	/* 继承某些已有的规则 */
-	extends: ["plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended", "prettier", "plugin:prettier/recommended"],
+	extends: ["plugin:vue/vue3-essential","plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended", "prettier", "plugin:prettier/recommended"],
 	rules: {
 		// eslint (http://eslint.cn/docs/rules)
 		"no-var": "error", // 要求使用 let 或 const 而不是 var
