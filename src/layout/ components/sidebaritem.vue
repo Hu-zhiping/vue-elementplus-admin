@@ -1,12 +1,12 @@
 <template>
 	<el-sub-menu v-if="props.item.children?.length" :index="props.item.path">
 		<template #title>
-			<span>{{ props.item.name }}</span>
+			<span>{{ props.item.meta.title }}</span>
 		</template>
 		<sidebaritem v-for="i in props.item.children" :key="i.path" :item="i"> </sidebaritem>
 	</el-sub-menu>
 	<el-menu-item v-else :index="props.item.path">
-		<span>{{ props.item.name }}</span>
+		<span>{{ props.item.meta.title }}</span>
 	</el-menu-item>
 </template>
 

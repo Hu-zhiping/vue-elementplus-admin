@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import Header from "./ components/header.vue";
-import Appmain from "./ components/appmain.vue";
+import Appmain from "./ components/app-main.vue";
 import Sidebar from "./ components/sidebar.vue";
 </script>
 
