@@ -5,5 +5,7 @@
 		<!-- </KeepAlive> -->
 	</RouterView>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+// console.log(">>>>", route.path);
+</script>
 <style></style>

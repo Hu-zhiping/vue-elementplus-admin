@@ -2,7 +2,7 @@
 	<Logo></Logo>
 	<div class="h-full wrap-scroll">
 		<el-scrollbar class="h-full">
-			<el-menu class="grid" :active-menu="activeMenu">
+			<el-menu class="grid" :active-menu="activeMenu" router>
 				<Sidebaritem v-for="item in menuList" :key="item.path" :item="item"> </Sidebaritem>
 			</el-menu>
 		</el-scrollbar>
@@ -14,18 +14,12 @@ import Sidebaritem from "./sidebaritem.vue";
 import Logo from "./Logo.vue";
 import useMenuStore from "@/store/ modules/menu";
 import { storeToRefs } from "pinia";
-import router from "@/router";
 import { useRoute } from "vue-router";
 const menuStore = useMenuStore();
-menuStore.generateRoute();
+// menuStore.generateRoute();
 const { menuList } = storeToRefs(menuStore);
 
-console.log(router);
-
-console.log(menuList);
-
 const route = useRoute();
-debugger;
 const activeMenu = computed(() => route.meta?.activeMenu ?? route.path);
 
 // const menuList = reactive([

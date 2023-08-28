@@ -1,7 +1,7 @@
 import { getMenuList } from "@/api/user";
 import { defineStore } from "pinia";
 
-import router from "@/router";
+// import router from "@/router";
 
 const modules = import.meta.glob("../../views/**/**.vue");
 
@@ -16,9 +16,7 @@ const useMenuStore = defineStore("menu", {
 			const { data } = await getMenuList();
 			this.menuList = data;
 			let routes = filterAsyncRouter(data);
-			routes.forEach(route => {
-				router.addRoute(route);
-			});
+			return routes;
 		}
 	}
 });
@@ -30,7 +28,7 @@ export const filterAsyncRouter = data => {
 			route.component = Layout;
 			filterAsyncRouter(route.children);
 		} else {
-			loadView(route.component);
+			route.component = loadView(route.component);
 		}
 	});
 

@@ -125,6 +125,7 @@
 </template>
 <script lang="ts" setup>
 import { doLogin } from "@/api/user.ts";
+import useUserStore from "@/store/ modules/user";
 // import {FormInstance, FormRules} from "element-plus";
 import { FormInstance, FormRules } from "element-plus";
 // import { ref, reactive } from "vue";
@@ -155,8 +156,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 			try {
 				const res = await doLogin();
 				console.log(res);
+				const { token } = res.data;
+				const userStore = useUserStore();
+				userStore.getToken(token);
+
 				// ElMessage.success(res.message);
-				debugger;
 				router.push({ name: "home" });
 			} catch (error) {
 				ElMessage.error("请求失败");

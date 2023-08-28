@@ -30,7 +30,7 @@ const mock: Array<MockMethod> = [
 				message: "请求成功",
 				data: [
 					{
-						id: 1,
+						id: "1",
 						path: "/system",
 						name: "system",
 						component: "Layout",
@@ -42,8 +42,8 @@ const mock: Array<MockMethod> = [
 						},
 						children: [
 							{
-								id: 2,
-								path: "/menu",
+								id: "2",
+								path: "menu",
 								name: "menu",
 								component: "system/menu/index",
 								meta: {
