@@ -3,33 +3,39 @@
 		<template #title>
 			<span>{{ props.item.meta.title }}</span>
 		</template>
-		<sidebaritem v-for="i in props.item.children" :key="i.id" :item="i"> </sidebaritem>
+		<sidebaritem v-for="i in props.item.children" :key="i.id" :item="i" :base-path="props.item.path"> </sidebaritem>
 	</el-sub-menu>
-	<el-menu-item v-else :index="props.item.path">
+	<el-menu-item v-else :index="getFullPath(props.basePath, props.item.path)">
 		<span>{{ props.item.meta.title }}</span>
 	</el-menu-item>
 </template>
 
 <script lang="ts" setup>
-type Props = {
-	item: any;
-};
-
-const props = defineProps<Props>();
+const props = defineProps({
+	item: {
+		type: Object,
+		default: null
+	},
+	basePath: {
+		type: String,
+		default: null
+	}
+});
 
 // 截取子菜单完整路径
-// const getFullPath = (baseUrl: string, url: string) => {
-// 	let rootUrl;
-// 	let path;
-// 	rootUrl = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
-// 	if (url.startsWith("/")) {
-// 		path = url;
-// 	} else {
-// 		path = `${rootUrl}${url}`;
-// 	}
-// 	console.log(path);
-// 	return path;
-// };
+const getFullPath = (basePath: string, path: string) => {
+	debugger;
+	let baseUrl;
+	let url;
+	baseUrl = basePath.endsWith("/") ? basePath : `${basePath}/`;
+	if (path.startsWith("/")) {
+		url = path;
+	} else {
+		url = `${baseUrl}${path}`;
+	}
+	console.log(url);
+	return url;
+};
 </script>
 
 <style></style>

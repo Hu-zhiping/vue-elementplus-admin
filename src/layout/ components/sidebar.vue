@@ -3,7 +3,7 @@
 	<div class="h-full wrap-scroll">
 		<el-scrollbar class="h-full">
 			<el-menu class="grid" :active-menu="activeMenu" router>
-				<Sidebaritem v-for="item in menuList" :key="item.path" :item="item"> </Sidebaritem>
+				<Sidebaritem v-for="item in menuList" :key="item.path" :item="item" :base-path="item.path"> </Sidebaritem>
 			</el-menu>
 		</el-scrollbar>
 	</div>
@@ -21,39 +21,6 @@ const { menuList } = storeToRefs(menuStore);
 
 const route = useRoute();
 const activeMenu = computed(() => route.meta?.activeMenu ?? route.path);
-
-// const menuList = reactive([
-// 	{
-// 		path: "/dd",
-// 		name: "父菜单",
-// 		// component: () => import("@/views/dd/index.vue")
-// 		children: [
-// 			{
-// 				path: "/d1",
-// 				name: "父菜单1"
-// 			},
-// 			{
-// 				path: "/d2",
-// 				name: "父菜单2"
-// 			}
-// 		]
-// 	},
-// 	{
-// 		path: "/dd3",
-// 		name: "父菜单2",
-// 		// component: () => import("@/views/dd/index.vue")
-// 		children: [
-// 			{
-// 				path: "/d13",
-// 				name: "父菜单13"
-// 			},
-// 			{
-// 				path: "/d23",
-// 				name: "父菜单23"
-// 			}
-// 		]
-// 	}
-// ]);
 </script>
 
 <style>
