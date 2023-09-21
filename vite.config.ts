@@ -5,7 +5,6 @@ import * as path from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-
 // mockjs
 import { viteMockServe } from "vite-plugin-mock";
 import viteEslint from "vite-plugin-eslint";
@@ -14,7 +13,7 @@ import viteEslint from "vite-plugin-eslint";
 export default defineConfig({
 	plugins: [
 		vue(),
-		viteEslint(),
+		// viteEslint(),
 		AutoImport({
 			resolvers: [ElementPlusResolver()],
 			imports: ["vue", "vue-router"]

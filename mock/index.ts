@@ -1,14 +1,12 @@
 import type { MockMethod } from "vite-plugin-mock";
-import Mock from "mockjs";
-
-const mock: Array<MockMethod> = [
+export default [
 	{
 		url: "/api/admin/login",
 		method: "post",
 		statusCode: 200,
 		response: () => {
 			return {
-				code: 0,
+				code: 200,
 				message: "请求成功",
 				data: {
 					token: "ASKS99WH7828JAU89892I0A6Y2802J",
@@ -26,7 +24,7 @@ const mock: Array<MockMethod> = [
 		statusCode: 200,
 		response: () => {
 			return {
-				code: 0,
+				code: 200,
 				message: "请求成功",
 				data: [
 					{
@@ -37,7 +35,7 @@ const mock: Array<MockMethod> = [
 						redirect: "menu",
 						meta: {
 							title: "系统设置",
-							icon: "system",
+							icon: "Tools",
 							hidden: false
 						},
 						children: [
@@ -48,8 +46,20 @@ const mock: Array<MockMethod> = [
 								component: "system/menu/index",
 								meta: {
 									title: "菜单列表",
-									icon: "menu",
+									icon: "Menu",
 									hidden: false
+								}
+							},
+							{
+								id: "3",
+								path: "user",
+								name: "user",
+								component: "system/user/index",
+								meta: {
+									title: "用户管理",
+									icon: "UserFilled",
+									hidden: false,
+									activeMenu: "/system/menu"
 								}
 							}
 						]
@@ -58,6 +68,4 @@ const mock: Array<MockMethod> = [
 			};
 		}
 	}
-];
-
-export default mock;
+] as MockMethod[]

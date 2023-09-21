@@ -13,17 +13,17 @@ const useMenuStore = defineStore("menu", {
 	}),
 	actions: {
 		async generateRoute() {
-			const { data } = await getMenuList();
-			this.menuList = data;
-			let routes = filterAsyncRouter(data);
+			const res = await getMenuList();
+			this.menuList = res.data;
+			let routes = filterAsyncRouter(res.data);
 			return routes;
 		}
 	}
 });
 
 // 路由生成
-export const filterAsyncRouter = data => {
-	data.forEach(route => {
+export const filterAsyncRouter = (data: any) => {
+	data.forEach((route: any) => {
 		if (route.children?.length > 0) {
 			route.component = Layout;
 			filterAsyncRouter(route.children);
@@ -36,7 +36,7 @@ export const filterAsyncRouter = data => {
 };
 
 // 动态加载vue文件
-export const loadView = view => {
+export const loadView = (view: any) => {
 	let res;
 	console.log(modules);
 	for (const path in modules) {
