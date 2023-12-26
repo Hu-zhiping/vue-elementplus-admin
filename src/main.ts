@@ -6,6 +6,7 @@ import router from "@/router";
 import "@/style/index.scss";
 import "virtual:svg-icons-register";
 import pinia from "@/store";
+import "@/router/permission.ts";
 
 //
 // import ElementPlus from 'element-plus'
