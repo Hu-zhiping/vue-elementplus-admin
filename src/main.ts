@@ -4,7 +4,7 @@ import App from "./App.vue";
 import router from "@/router";
 // import "@/style/style.scss";
 import "@/style/index.scss";
-
+import "virtual:svg-icons-register";
 import pinia from "@/store";
 
 //

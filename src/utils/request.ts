@@ -3,11 +3,10 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosR
 interface ApiConfig {
 	baseURL: string;
 	timeout: number;
-	// 其他配置项...
 }
 
 const config: ApiConfig = {
-	baseURL: "/api",
+	baseURL: import.meta.env.VITE_APP_BASE_API,
 	timeout: 10000
 };
 
@@ -29,13 +28,15 @@ class Http {
 
 		this.instance.interceptors.response.use(
 			(response: AxiosResponse<any, any>) => {
-				const { data } = response;
-				if (data.code && data.code != 200) {
-					ElMessage.error("接口异常");
+				const { code, msg } = response.data;
+				if (code && code == 200) {
+					return response.data;
 				}
-				return data;
+				ElMessage.error(msg || "系统错误");
+				return Promise.reject(new Error(msg || "系统错误"));
 			},
 			(error: any) => {
+				ElMessage.error(error.msg || "系统错误");
 				return Promise.reject(error);
 			}
 		);

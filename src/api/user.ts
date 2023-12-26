@@ -10,7 +10,7 @@ export const getMenuList = () => {
 };
 
 export const setToken = (token: string) => {
-	localStorage.setItem("token", token);
+	localStorage.setItem("access_token", token);
 };
 
 export const getToken = () => {

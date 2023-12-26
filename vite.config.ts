@@ -7,7 +7,9 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // mockjs
 import { viteMockServe } from "vite-plugin-mock";
-import viteEslint from "vite-plugin-eslint";
+
+import {createSvgIconsPlugin} from "vite-plugin-svg-icons";
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +18,10 @@ export default defineConfig({
 		// viteEslint(),
 		AutoImport({
 			resolvers: [ElementPlusResolver()],
-			imports: ["vue", "vue-router"]
+			imports: ["vue", "vue-router"],
+			eslintrc: {
+				enabled: false //是否自动生成 eslint 规则，建议生成之后设置 false
+			}
 		}),
 		Components({
 			resolvers: [ElementPlusResolver()]
@@ -25,6 +30,12 @@ export default defineConfig({
 			mockPath: "mock",
 			localEnabled: true,
 			prodEnabled: false
+		}),
+		createSvgIconsPlugin({
+			//指定需要缓存的图标文件夹
+			iconDirs: [path.resolve(process.cwd(), "src/assets/icons")],
+			//指定symbolId格式
+			symbolId: "icon-[dir]-[name]"
 		})
 	],
 	resolve: {

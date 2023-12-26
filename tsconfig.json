@@ -21,7 +21,8 @@
     "paths": {
       "@": ["src"],
       "@/*": ["src/*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true // 允许默认导入
   },
   "include": [
     "src/**/*.ts",
