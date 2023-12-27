@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import useAppStore from "@/store/ modules/app";
+import useAppStore from "@/store/modules/app";
 const appStore = useAppStore();
 const isCollapse = computed(() => {
 	return !appStore.isCollapse;

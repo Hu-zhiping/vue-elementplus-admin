@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 // import router from "@/router";
 
-const modules = import.meta.glob("../../views/**/**.vue");
+const modules = import.meta.glob("@/src/**/**.vue");
 
 const Layout = () => import("@/layout/index.vue");
 
@@ -18,7 +18,8 @@ const useMenuStore = defineStore("menu", {
 			let routes = filterAsyncRouter(res.data);
 			return routes;
 		}
-	}
+	},
+	persist: true
 });
 
 // 路由生成
@@ -31,7 +32,6 @@ export const filterAsyncRouter = (data: any) => {
 			route.component = loadView(route.component);
 		}
 	});
-
 	return data;
 };
 

@@ -7,14 +7,19 @@ const useAppStore = defineStore("appStore", {
 		showMenus: [], //渲染菜单
 		paths: [], //路由路径
 		tabs: [], //标签页
-		useInfo: []
+		useInfo: [],
+		isFullscreen: false,
+		userSetting: {
+			language: "zhCN" // 语言
+		}
 	}),
 	getters: {},
 	actions: {
 		setIsCollapse() {
 			this.isCollapse = !this.isCollapse;
 		}
-	}
+	},
+	persist: true
 });
 
 export default useAppStore;

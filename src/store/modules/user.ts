@@ -10,7 +10,8 @@ const useUserStore = defineStore("user", {
 			this.token = data;
 			setToken(data);
 		}
-	}
+	},
+	persist: true
 });
 
 export default useUserStore;

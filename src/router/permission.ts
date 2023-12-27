@@ -1,6 +1,6 @@
 import router from "@/router/index.ts";
 import { getToken } from "@/api/user.ts";
-import useMenuStore from "@/store/ modules/menu.ts";
+import useMenuStore from "@/store/modules/menu.ts";
 import { start, close } from "@/utils/nprogress.ts";
 
 const whiteList = ["/", "/login"];

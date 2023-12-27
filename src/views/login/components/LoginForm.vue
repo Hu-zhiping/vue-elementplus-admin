@@ -125,7 +125,7 @@
 </template>
 <script lang="ts" setup>
 import { doLogin } from "@/api/user.ts";
-import useUserStore from "@/store/ modules/user";
+import useUserStore from "@/store/modules/user";
 // import {FormInstance, FormRules} from "element-plus";
 import { FormInstance, FormRules } from "element-plus";
 // import { ref, reactive } from "vue";

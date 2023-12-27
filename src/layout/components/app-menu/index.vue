@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import Sidebaritem from "./sidebaritem.vue";
-import useMenuStore from "@/store/ modules/menu";
+import useMenuStore from "@/store/modules/menu";
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 const menuStore = useMenuStore();
@@ -22,7 +22,7 @@ const activeMenu = computed(() => {
 	return route.meta?.activeMenu ?? route.path;
 });
 
-import useAppStore from "@/store/ modules/app";
+import useAppStore from "@/store/modules/app";
 
 const appStore = useAppStore();
 

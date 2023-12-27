@@ -13,12 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import AppHeader from "./ components/app-header/index.vue";
-import AppMain from "./ components/app-main/index.vue";
-import AppMenu from "./ components/app-menu/index.vue";
-import AppLogo from "./ components/app-logo/app-logo.vue";
+import AppHeader from "@/layout/components/app-header/index.vue";
+import AppMain from "@/layout/components/app-main/index.vue";
+import AppMenu from "@/layout/components/app-menu/index.vue";
+import AppLogo from "@/layout/components/app-logo/app-logo.vue";
 
-import useAppStore from "@/store/ modules/app";
+import useAppStore from "@/store/modules/app";
 
 const appStore = useAppStore();
 
