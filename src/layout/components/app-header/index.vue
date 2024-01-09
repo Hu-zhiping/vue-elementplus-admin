@@ -17,14 +17,13 @@ import appCollapse from "./app-collapse.vue";
 import Breadcrumb from "@/layout/components/app-header/Breadcrumb.vue";
 import UserSet from "@/layout/components/app-header/UserSet.vue";
 </script>
-<style>
+<style lang="scss" scoped>
 .app-header {
 	border: 1px solid var(--el-border-color-lighter);
 	.header-left {
 		display: flex;
 		justify-content: center;
 		align-content: center;
-		//margin-left: 10px;
 	}
 	.header-right {
 		display: flex;

@@ -1,0 +1,15 @@
+:root.light {
+	color-scheme: dark;
+	/*--el-menu-text-color: red;*/
+	--el-color-primary: #2a0505;
+	/*--el-text-color-primary:#333;*/
+	/*--el-menu-item-height: 56px;*/
+	/*--el-menu-item-height:25px;*/
+	/*--el-menu-horizontal-sub-item-height: 36px;*/
+	/*--el-font-size-base: 16px;*/
+	/*--el-color-primary-light-9: red;*/
+	/*--el-border-color: #333;*/
+	/*--el-menu-base-level-padding: 20px;*/
+	/*--el-menu-level-padding: 20px;*/
+	/*--el-menu-icon-width: 24px;*/
+}

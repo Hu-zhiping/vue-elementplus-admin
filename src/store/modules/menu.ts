@@ -19,7 +19,7 @@ const useMenuStore = defineStore("menu", {
 			return routes;
 		}
 	},
-	persist: true
+	persist: false
 });
 
 // 路由生成

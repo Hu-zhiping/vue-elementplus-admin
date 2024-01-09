@@ -27,8 +27,21 @@
 		<div class="set-item">
 			<svg-icon icon-class="LanguageOutline" size="18" color="#0e7a0d"></svg-icon>
 		</div>
+		<div class="set-item">
+			<el-switch v-model="value1" active-action-icon="Moon" inactive-action-icon="Moon">
+				<template #active-action>
+					<el-icon><Sunny /></el-icon>
+				</template>
+				<template #inactive-action>
+					<el-icon><Moon /></el-icon>
+				</template>
+			</el-switch>
+		</div>
 		<div class="set-item" @click="handleSet">
 			<svg-icon icon-class="SettingsOutline" size="18" color="#0e7a0d"></svg-icon>
+		</div>
+		<div class="set-item">
+			<el-avatar :icon="UserFilled" />
 		</div>
 	</div>
 	<el-drawer v-model="drawer" title="设置" size="20%">
@@ -36,6 +49,7 @@
 	</el-drawer>
 </template>
 <script lang="ts" setup>
+import { Moon, Sunny } from "@element-plus/icons-vue";
 import useAppStore from "@/store/modules/app.ts";
 import screenfull from "screenfull";
 import router from "@/router";
@@ -62,6 +76,8 @@ const handleFullScreen = () => {
 		screenfull.toggle();
 	}
 };
+
+const value1 = ref(true);
 const handleHome = () => {
 	router.push({ name: "home" });
 };

@@ -8,8 +8,7 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // mockjs
 import { viteMockServe } from "vite-plugin-mock";
 
-import {createSvgIconsPlugin} from "vite-plugin-svg-icons";
-
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,7 +23,11 @@ export default defineConfig({
 			}
 		}),
 		Components({
-			resolvers: [ElementPlusResolver()]
+			resolvers: [
+				ElementPlusResolver({
+					importStyle: "sass"
+				})
+			]
 		}),
 		viteMockServe({
 			mockPath: "mock",
@@ -52,4 +55,11 @@ export default defineConfig({
 			}
 		}
 	}
+	// css: {
+	// 	preprocessorOptions: {
+	// 		scss: {
+	// 			additionalData: `@use "@/style/var.css" as *;`
+	// 		}
+	// 	}
+	// }
 });
