@@ -32,7 +32,7 @@ export default [
 						path: "/system",
 						name: "system",
 						component: "Layout",
-						redirect: "menu",
+						redirect: "/menu",
 						meta: {
 							title: "系统设置",
 							icon: "Tools",
@@ -68,4 +68,4 @@ export default [
 			};
 		}
 	}
-] as MockMethod[]
+] as MockMethod[];

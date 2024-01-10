@@ -7,8 +7,8 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // mockjs
 import { viteMockServe } from "vite-plugin-mock";
-
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import { createStyleImportPlugin, ElementPlusResolve } from "vite-plugin-style-import";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -39,11 +39,23 @@ export default defineConfig({
 			iconDirs: [path.resolve(process.cwd(), "src/assets/icons")],
 			//指定symbolId格式
 			symbolId: "icon-[dir]-[name]"
+		}),
+		createStyleImportPlugin({
+			resolves: [ElementPlusResolve()],
+			libs: [
+				{
+					libraryName: "element-plus",
+					esModule: true,
+					resolveStyle(name) {
+						return `element-plus/theme-chalk/${name}.css`;
+					}
+				}
+			]
 		})
 	],
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./src")
+			"@": path.resolve(__dirname, "src")
 		}
 	},
 	server: {
@@ -54,12 +66,12 @@ export default defineConfig({
 				rewrite: path => path.replace(new RegExp("/^\\/api/"), "")
 			}
 		}
+	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: `@use "@/styles/var.css"  as *;`
+			}
+		}
 	}
-	// css: {
-	// 	preprocessorOptions: {
-	// 		scss: {
-	// 			additionalData: `@use "@/style/var.css" as *;`
-	// 		}
-	// 	}
-	// }
 });

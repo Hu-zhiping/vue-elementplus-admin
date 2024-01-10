@@ -1,7 +1,7 @@
-:root.light {
-	color-scheme: dark;
+:root {
+	color-scheme: light;
 	/*--el-menu-text-color: red;*/
-	--el-color-primary: #2a0505;
+	--el-color-primary: red;
 	/*--el-text-color-primary:#333;*/
 	/*--el-menu-item-height: 56px;*/
 	/*--el-menu-item-height:25px;*/

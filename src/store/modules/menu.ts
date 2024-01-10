@@ -1,9 +1,7 @@
 import { getMenuList } from "@/api/user";
 import { defineStore } from "pinia";
 
-// import router from "@/router";
-
-const modules = import.meta.glob("@/src/**/**.vue");
+const modules = import.meta.glob("@/views/**/*.vue");
 
 const Layout = () => import("@/layout/index.vue");
 
@@ -27,7 +25,7 @@ export const filterAsyncRouter = (data: any) => {
 	data.forEach((route: any) => {
 		if (route.children?.length > 0) {
 			route.component = Layout;
-			filterAsyncRouter(route.children);
+			route.children = filterAsyncRouter(route.children);
 		} else {
 			route.component = loadView(route.component);
 		}
@@ -38,12 +36,15 @@ export const filterAsyncRouter = (data: any) => {
 // 动态加载vue文件
 export const loadView = (view: any) => {
 	let res;
-	console.log(modules);
+	console.log("modules", modules);
 	for (const path in modules) {
 		const dir = path.split("views/")[1].split(".vue")[0];
 		if (dir === view) {
 			res = () => modules[path]();
 		}
+	}
+	if (!res) {
+		console.error(`未能找到与路径 ${view} 对应的组件`);
 	}
 	return res;
 };

@@ -7,9 +7,6 @@ import "@/styles/index.scss";
 import "virtual:svg-icons-register";
 import pinia from "@/store";
 import "@/router/permission.ts";
-
-//
-// import ElementPlus from 'element-plus'
 // 国际化
 // import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
@@ -23,5 +20,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(router);
 
 app.use(pinia);
-// app.use(zhCn)
+// app.use(zhCn);
 app.mount("#app");

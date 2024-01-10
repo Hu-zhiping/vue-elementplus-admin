@@ -18,6 +18,17 @@ const routes: Array<RouteRecordRaw> = [
 				component: () => import("@/views/home/index.vue")
 			}
 		]
+	},
+	{
+		path: "/:pathMatch(.*)*",
+		name: "notMatch",
+		redirect: "/404"
+	},
+	{
+		path: "/404",
+		name: "NotFound",
+		component: () => import("@/views/404.vue"),
+		meta: { title: "404", hidden: true }
 	}
 ];
 
