@@ -40,16 +40,25 @@
 		<div class="set-item" @click="handleSet">
 			<svg-icon icon-class="SettingsOutline" size="18" color="#0e7a0d"></svg-icon>
 		</div>
-		<div class="set-item">
-			<el-avatar :icon="UserFilled" />
-		</div>
+		<el-dropdown @command="handleCommand">
+			<div class="set-item">
+				<el-avatar :icon="UserFilled" />
+			</div>
+			<template #dropdown>
+				<el-dropdown-menu>
+					<el-dropdown-item command="password">用户信息</el-dropdown-item>
+					<el-dropdown-item command="password">修改密码</el-dropdown-item>
+					<el-dropdown-item command="logout">退出登录</el-dropdown-item>
+				</el-dropdown-menu>
+			</template>
+		</el-dropdown>
 	</div>
 	<el-drawer v-model="drawer" title="设置" size="20%">
 		<div>111111111</div>
 	</el-drawer>
 </template>
 <script lang="ts" setup>
-import { Moon, Sunny } from "@element-plus/icons-vue";
+import { Moon, Sunny, UserFilled } from "@element-plus/icons-vue";
 import useAppStore from "@/store/modules/app.ts";
 import screenfull from "screenfull";
 import router from "@/router";
@@ -57,14 +66,6 @@ import router from "@/router";
 const appStore = useAppStore();
 const drawer = ref(false);
 
-const userSetIcon = ref([
-	{ size: 20, color: "0e7a0d", name: "GithubOutlined", show: true },
-	{ size: 18, color: "0e7a0d", name: "HomeOutline", show: true },
-	{ size: 18, color: "0e7a0d", name: "NotificationsOutline", show: true },
-	{ size: 18, color: "0e7a0d", name: "LanguageOutline", show: true },
-	{ size: 18, color: "0e7a0d", name: appStore.isFullscreen ? "OffScreen" : "FullScreen", show: true },
-	{ size: 18, color: "0e7a0d", name: "SettingsOutline", show: true }
-]);
 const handleFullScreen = () => {
 	// 检测当前是否全屏，如果是全屏就退出，否则就全屏
 	if (screenfull.isFullscreen) {
@@ -84,6 +85,15 @@ const handleHome = () => {
 
 const handleSet = () => {
 	drawer.value = !drawer.value;
+};
+
+const handleCommand = (command: string) => {
+	if ("logout" == command) {
+		localStorage.removeItem("access_token");
+		router.push({
+			path: "/login"
+		});
+	}
 };
 </script>
 <style lang="scss" scoped>

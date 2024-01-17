@@ -1,11 +1,17 @@
 <template>
-	<!--
-<el-breadcrumb separator="/">
-  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-  <el-breadcrumb-item v-for="item in breadList" :key="item"><a href="/">item.name</a></el-breadcrumb-item>
-</el-breadcrumb> -->
+	<el-breadcrumb separator="/">
+		<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+		<template v-for="item in breadcrumbList" :key="item">
+			<el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title }}</el-breadcrumb-item>
+		</template>
+	</el-breadcrumb>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const route = useRoute();
+const breadcrumbList = computed(() => {
+	return route.matched.filter(item => item.meta && item.meta.title);
+});
+</script>
 
 <style lang="scss" scoped></style>
