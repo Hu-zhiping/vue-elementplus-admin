@@ -1,7 +1,7 @@
 :root {
 	color-scheme: light;
 	/*--el-menu-text-color: red;*/
-	--el-color-primary: red;
+	/* --el-color-primary: red; */
 	/*--el-text-color-primary:#333;*/
 	/*--el-menu-item-height: 56px;*/
 	/*--el-menu-item-height:25px;*/
@@ -12,4 +12,10 @@
 	/*--el-menu-base-level-padding: 20px;*/
 	/*--el-menu-level-padding: 20px;*/
 	/*--el-menu-icon-width: 24px;*/
+	--el-menu-item-height:40px;
+	--el-menu-item-font-size: 14px;
+	--el-menu-active-color:rgba(22,93,255,1);
+	/* --el-menu-item-height:22px; */
+	--el-color-primary-light-9:rgba(242, 243, 245, 1);
+	--el-menu-sub-item-height:40px;
 }

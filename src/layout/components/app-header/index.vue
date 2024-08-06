@@ -4,11 +4,6 @@
 			<app-collapse />
 			<Breadcrumb />
 		</div>
-		<!--		<div class="header-right">-->
-		<!--			<FullScreen />-->
-		<!--			<NavPopover />-->
-		<!--			<UserSet />-->
-		<!--		</div>-->
 		<UserSet />
 	</div>
 </template>
@@ -22,8 +17,10 @@ import UserSet from "@/layout/components/app-header/UserSet.vue";
 	border: 1px solid var(--el-border-color-lighter);
 	.header-left {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		align-content: center;
+		min-width: 202px;
+		vertical-align: middle;
 	}
 	.header-right {
 		display: flex;

@@ -7,8 +7,10 @@
 		<sidebaritem v-for="i in props.item.children" :key="i.id" :item="i" :base-path="props.item.path"> </sidebaritem>
 	</el-sub-menu>
 	<el-menu-item v-else :index="getFullPath(props.basePath, props.item.path)">
-		<el-icon><component :is="props.item.meta?.icon" /> </el-icon>
-		<span>{{ props.item.meta.title }}</span>
+		<div class="item">
+			<el-icon><component :is="props.item.meta?.icon" /> </el-icon>
+			<span>{{ props.item.meta.title }}</span>
+		</div>
 	</el-menu-item>
 </template>
 
@@ -39,4 +41,9 @@ const getFullPath = (basePath: string, path: string) => {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.item {
+	line-height: 22px;
+	padding: 9px 80px 9px 16px;
+}
+</style>

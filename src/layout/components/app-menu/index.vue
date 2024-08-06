@@ -1,7 +1,7 @@
 <template>
 	<div class="h-full app-menu">
 		<el-scrollbar class="h-full w-full">
-			<el-menu :active-menu="activeMenu" router :collapse="isCollapse">
+			<el-menu :active-menu="activeMenu" :collapse="isCollapse">
 				<Sidebaritem v-for="item in menuList" :key="item.path" :item="item" :base-path="item.path"> </Sidebaritem>
 			</el-menu>
 		</el-scrollbar>

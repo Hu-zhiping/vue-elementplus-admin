@@ -1,6 +1,6 @@
 <template>
 	<div class="h-full flex" :style="layoutStyle">
-		<div class="h-full app-layout-sider">
+		<div class="h-full app-layout-sider w-[200px]">
 			<app-logo></app-logo>
 			<app-menu></app-menu>
 		</div>
@@ -28,7 +28,7 @@ const appStore = useAppStore();
 
 const layoutStyle = computed(() => {
 	return {
-		"--app-aside-width": appStore.isCollapse ? "64px" : "210px"
+		"--app-aside-width": appStore.isCollapse ? "64px" : "200px"
 	};
 });
 </script>
