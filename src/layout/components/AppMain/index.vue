@@ -14,7 +14,7 @@
 <script lang="ts" setup></script>
 <style lang="scss">
 .app-main {
-	background-color: var(--el-color-primary-light-9);
+	background-color: rgba(242, 243, 245, 1);
 	height: calc(100vh - 50px);
 	padding: 10px;
 }

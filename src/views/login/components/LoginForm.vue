@@ -1,5 +1,4 @@
 <template>
-	<!--    <div class="container">-->
 	<el-form ref="loginFormRef" :model="loginForm" :rules="rules" label-position="top" :show-message="true" class="login-form">
 		<el-row :gutter="20">
 			<el-col :span="24">
@@ -121,7 +120,6 @@
 			</el-col>
 		</el-row>
 	</el-form>
-	<!--    </div>-->
 </template>
 <script lang="ts" setup>
 import { doLogin } from "@/api/user.ts";
@@ -152,6 +150,7 @@ const router = useRouter();
 const submitForm = async (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	await formEl.validate(async valid => {
+    debugger;
 		if (valid) {
 			try {
 				const res = await doLogin();
@@ -162,7 +161,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
 				// ElMessage.success(res.message);
 				router.push({ name: "home" });
+
 			} catch (error) {
+
 				ElMessage.error("请求失败");
 			}
 		} else {

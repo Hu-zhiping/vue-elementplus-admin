@@ -8,14 +8,17 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: "/",
-		name: "index",
-		redirect: "/home",
 		component: () => import("@/layout/index.vue"),
+		// redirect: "/dashboard",
 		children: [
 			{
-				path: "home",
-				name: "home",
-				component: () => import("@/views/home/index.vue")
+				path: "/dashboard",
+				name: "dashboard",
+				component: () => import("@/views/dashboard/index.vue"),
+				meta: {
+					hidden: false,
+					title: "首页"
+				}
 			}
 		]
 	},

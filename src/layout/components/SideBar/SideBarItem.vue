@@ -1,13 +1,13 @@
 <template>
 	<el-sub-menu v-if="props.item.children?.length" :index="props.item.path" :key="props.item.id">
 		<template #title>
-			<component class="w-[15px] mr-2 ml-1" :is="props.item.meta?.icon" />
+			<el-icon><component :is="props.item.meta?.icon" /></el-icon>
 			<span>{{ props.item.meta.title }}</span>
 		</template>
-		<SideBarItem v-for="i in props.item.children" :key="i.id" :item="i"> </SideBarItem>
+		<SideBarItem v-for="i in props.item.children" :key="i.id" :item="i" :base-path="props.item.path"> </SideBarItem>
 	</el-sub-menu>
 
-	<el-menu-item v-else :index="getDealPath(props.item.path)">
+	<el-menu-item v-else :index="resolvePath(props.basePath, props.item.path)">
 		<div class="item">
 			<el-icon><component :is="props.item.meta?.icon" /> </el-icon>
 			<span>{{ props.item.meta.title }}</span>
@@ -28,10 +28,17 @@ const props = defineProps({
 });
 
 // 截取子菜单完整路径
-const getDealPath = (path: string) => {
-	if (!path) return "";
-	const pathArr = path.split("/");
-	return pathArr.slice(-1)[0];
+const resolvePath = (basePath: string, path: string) => {
+	let baseUrl;
+	let url;
+	baseUrl = basePath.endsWith("/") ? basePath : `${basePath}/`;
+	if (path.startsWith("/")) {
+		url = path;
+	} else {
+		url = `${baseUrl}${path}`;
+	}
+	console.log(url);
+	return url;
 };
 </script>
 
