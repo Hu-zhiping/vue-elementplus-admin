@@ -1,7 +1,9 @@
 <template>
 	<RouterView v-slot="{ Component, route }">
 		<!-- <KeepAlive :include=""> -->
-		<component :is="Component" :key="route.path" class="content"> </component>
+		<transition name="fade">
+			<component :is="Component" :key="route.path" class="content"> </component>
+		</transition>
 		<!-- </KeepAlive> -->
 		<!-- </KeepAlive> -->
 	</RouterView>

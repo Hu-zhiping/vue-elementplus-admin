@@ -54,7 +54,9 @@
 		</el-dropdown>
 	</div>
 	<el-drawer v-model="drawer" title="设置" size="20%">
-		<div>111111111</div>
+		<div class="demo-color-block">
+			<color-picker />
+		</div>
 	</el-drawer>
 </template>
 <script lang="ts" setup>
@@ -62,7 +64,7 @@ import { Moon, Sunny, UserFilled } from "@element-plus/icons-vue";
 import useAppStore from "@/store/modules/app.ts";
 import screenfull from "screenfull";
 import router from "@/router";
-
+import ColorPicker from "@/layout/components/ColorPicker.vue";
 const appStore = useAppStore();
 const drawer = ref(false);
 
