@@ -9,7 +9,7 @@
 </template>
 <script lang="ts" setup>
 import appCollapse from "./app-collapse.vue";
-import Breadcrumb from "@/layout/components/app-header/Breadcrumb.vue";
+import Breadcrumb from "@/layout/components/NavBar/Breadcrumb.vue";
 import UserSet from "@/layout/components/app-header/UserSet.vue";
 </script>
 <style lang="scss" scoped>

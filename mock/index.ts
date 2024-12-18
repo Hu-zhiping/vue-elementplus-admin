@@ -41,7 +41,7 @@ export default [
 						children: [
 							{
 								id: "2",
-								path: "menu",
+								path: "/menu",
 								name: "menu",
 								component: "system/menu/index",
 								meta: {
@@ -52,7 +52,7 @@ export default [
 							},
 							{
 								id: "3",
-								path: "user",
+								path: "/user",
 								name: "user",
 								component: "system/user/index",
 								meta: {
