@@ -13,7 +13,7 @@ const useMenuStore = defineStore("menu", {
 		async generateRoute() {
 			const res = await getMenuList();
 			this.menuList = res.data;
-			let routes = filterAsyncRouter(res.data);
+			let routes = filterRoute(res.data);
 			return routes;
 		}
 	},
@@ -21,13 +21,14 @@ const useMenuStore = defineStore("menu", {
 });
 
 // 路由生成
-export const filterAsyncRouter = (data: any) => {
-	data.forEach((route: any) => {
-		if (route.children?.length > 0) {
-			route.component = Layout;
-			route.children = filterAsyncRouter(route.children);
+export const filterRoute = (data: any) => {
+	data.forEach((item: any) => {
+		if (item.children?.length > 0) {
+			item.component = Layout;
+			//delete item.component;
+			item.children = filterRoute(item.children);
 		} else {
-			route.component = loadView(route.component);
+			item.component = loadView(item.component);
 		}
 	});
 	return data;

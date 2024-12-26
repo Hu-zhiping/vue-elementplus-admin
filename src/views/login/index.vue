@@ -1,14 +1,12 @@
 <template>
-	<div class="login-wrapper">
-		<div class="content">
-			<div class="login_left"></div>
-			<div class="login_right">
-				<div class="form">
-					<LoginForm />
-				</div>
-			</div>
-		</div>
-	</div>
+	<el-row class="login-layout">
+		<el-col :lg="16" :md="12" class="login-left-panel">
+			<div class="left-panel-content">11111111111111111</div>
+		</el-col>
+		<el-col :lg="8" :md="12" class="login-right-panel">
+			<LoginForm />
+		</el-col>
+	</el-row>
 </template>
 
 <script lang="ts" setup>
@@ -16,58 +14,23 @@ import LoginForm from "@/views/login/components/LoginForm.vue";
 </script>
 
 <style scoped lang="scss">
-.login-wrapper {
+.login-layout {
 	position: relative;
-	height: 100%;
+	height: 100vh;
 
-	.content {
+	.login-left-panel {
 		position: relative;
 		margin: 0 auto;
-		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background: linear-gradient(to left, #d3959b, #bfe6ba);
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	}
 
-		.login_left {
-			flex: 1 1 0%;
-		}
-
-		.login_right {
-			flex: 1 1 0%;
-			position: relative;
-
-			.form {
-				display: flex;
-				max-width: 500px;
-				margin: auto;
-				height: 100%;
-				align-items: center;
-				background-color: white;
-				border-radius: 10px;
-			}
-		}
+	.login-right-panel {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 }
-
-//.login {
-//  width: 400px;
-//  height: 300px;
-//  border: 1px solid red;
-//  display: flex;
-//  flex-direction: column;
-//  //justify-content: center;
-//  align-items: center;
-//
-//  .title {
-//    font-size: 20px;
-//    font-weight: 500;
-//    text-align: center;
-//    margin-bottom: 32px;
-//  }
-//
-//  .el-form{
-//    width: 295px;
-//  }
-//}
 </style>
