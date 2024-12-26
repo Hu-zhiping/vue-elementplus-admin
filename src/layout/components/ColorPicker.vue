@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import colorTool from "@/utils/theme"; //引入方法
-const color = ref<string>("#409eff");
+const color = ref<string>("#ff4040");
 const colorChange = (value: string) => {
 	if (value) {
 		color.value = value;
@@ -28,7 +28,7 @@ const predefine = ref<string[]>(["#409eff", "#009688", "#536dfe", "#ff5c93", "#c
 </script>
 
 <template>
-	<div>主题颜色</div>
+	<el-divider content-position="center" border-style="solid">主题颜色</el-divider>
 	<el-color-picker v-model="color" @change="colorChange" :predefine="predefine" />
 </template>
 
