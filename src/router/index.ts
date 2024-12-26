@@ -1,23 +1,29 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/login",
 		name: "login",
-		component: () => import("@/views/login/index.vue")
+		component: () => import("@/views/login/index.vue"),
+		meta: {
+			title: "登录",
+			hidden: true
+		}
 	},
 	{
 		path: "/",
 		component: () => import("@/layout/index.vue"),
-		// redirect: "/dashboard",
+		redirect: "dashboard",
+		meta: { title: "监控页", icon: "Menu" },
 		children: [
 			{
-				path: "/dashboard",
+				path: "dashboard",
 				name: "dashboard",
 				component: () => import("@/views/dashboard/index.vue"),
 				meta: {
 					hidden: false,
-					title: "首页"
+					title: "首页",
+					icon: "HomeFilled"
 				}
 			}
 		]
@@ -25,7 +31,8 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/:pathMatch(.*)*",
 		name: "notMatch",
-		redirect: "/404"
+		redirect: "/404",
+		meta: { title: "404", hidden: true }
 	},
 	{
 		path: "/404",

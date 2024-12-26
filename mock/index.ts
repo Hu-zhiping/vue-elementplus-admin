@@ -32,7 +32,7 @@ export default [
 						path: "/system",
 						name: "system",
 						component: "Layout",
-						redirect: "/user",
+						redirect: "user",
 						meta: {
 							title: "系统设置",
 							icon: "Tools",

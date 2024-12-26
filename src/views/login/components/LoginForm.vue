@@ -150,7 +150,6 @@ const router = useRouter();
 const submitForm = async (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	await formEl.validate(async valid => {
-    debugger;
 		if (valid) {
 			try {
 				const res = await doLogin();
@@ -158,12 +157,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 				const { token } = res.data;
 				const userStore = useUserStore();
 				userStore.getToken(token);
-
-				// ElMessage.success(res.message);
-				router.push({ name: "home" });
-
+				router.push({ name: "dashboard" });
 			} catch (error) {
-
 				ElMessage.error("请求失败");
 			}
 		} else {

@@ -2,9 +2,7 @@
 	<el-breadcrumb separator="/">
 		<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
 		<template v-for="item in breadcrumbList" :key="item">
-			<el-breadcrumb-item :to="{ path: item.path === '/dashboard' ? '/' : item.path }">{{
-				item.meta.title
-			}}</el-breadcrumb-item>
+			<el-breadcrumb-item :to="{ path: item.path }">{{ item.meta.title }}</el-breadcrumb-item>
 		</template>
 	</el-breadcrumb>
 </template>

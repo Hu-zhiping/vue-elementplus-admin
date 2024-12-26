@@ -5,8 +5,8 @@
 			<span v-else>HelloAdmin</span>
 		</div>
 		<el-scrollbar class="wrap-scroll">
-			<el-menu :collapse="appStore.isCollapse" :router="true">
-				<SidebarItem v-for="item in menuList" :key="item.path" :item="item" :base-path="item.path"> </SidebarItem>
+			<el-menu :collapse="appStore.isCollapse" :router="true" :default-active="activeMenu">
+				<SidebarItem v-for="item in combinedRoutes" :key="item.path" :item="item" :base-path="item.path"> </SidebarItem>
 			</el-menu>
 		</el-scrollbar>
 	</div>
@@ -15,15 +15,12 @@
 <script lang="ts" setup>
 import SidebarItem from "./SideBarItem.vue";
 import useMenuStore from "@/store/modules/menu.ts";
-import { storeToRefs } from "pinia";
-// import { useRoute } from "vue-router";
 const menuStore = useMenuStore();
-const { menuList } = storeToRefs(menuStore);
-
-// const route = useRoute();
-// const activeMenu = computed(() => {
-// 	return route.meta?.activeMenu ?? route.path;
-// });
+const { combinedRoutes } = menuStore;
+const route = useRoute();
+const activeMenu = computed(() => {
+	return route.path;
+});
 
 import useAppStore from "@/store/modules/app.ts";
 
@@ -33,5 +30,14 @@ const appStore = useAppStore();
 <style lang="scss" scoped>
 .wrap-scroll {
 	height: calc(100vh - 50px);
+}
+
+// 添加以下样式以消除展开与折叠时的边框痕迹
+.el-menu {
+	border-right: none; // 移除右侧边框
+}
+
+.el-menu--collapse {
+	border-right: 3px solid transparent; // 折叠状态下的透明边框
 }
 </style>

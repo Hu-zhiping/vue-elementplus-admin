@@ -12,7 +12,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
 			next({ path: "/" });
 		} else {
 			const menuStore = useMenuStore();
-			if (menuStore.menuList.length === 0) {
+			if (menuStore.dynamicRoutes.length === 0) {
 				const routes = await menuStore.generateRoute();
 				routes.forEach((route: any) => {
 					router.addRoute(route);
