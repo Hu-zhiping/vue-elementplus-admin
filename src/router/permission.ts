@@ -12,21 +12,29 @@ router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormali
 			next({ path: "/" });
 		} else {
 			const menuStore = useMenuStore();
-			if (menuStore.dynamicRoutes.length === 0) {
-				const routes = await menuStore.generateRoute();
+			if (!menuStore.asyncRoutes.length) {
+				let routes;
+				// 优先使用持久化的菜单数据
+				if (menuStore.menuList.length) {
+					routes = menuStore.reprocessRoutes();
+				} else {
+					routes = await menuStore.fetchMenuList();
+				}
+				
+				// 添加路由
 				routes.forEach((route: any) => {
 					router.addRoute(route);
 				});
-				if (to.redirectedFrom != undefined) {
-					next({ path: to.redirectedFrom?.fullPath, replace: true });
+
+				// 如果是从其他页面重定向来的，返回原页面
+				if (to.redirectedFrom) {
+					next({ path: to.redirectedFrom.fullPath, replace: true });
 				} else {
 					next({ ...to, replace: true });
 				}
 			} else {
 				next();
 			}
-			// menuStore.generateRoute();
-			// next({ ...to, replace: true });
 		}
 	} else {
 		if (whiteList.indexOf(to.path) > -1) {

@@ -6,7 +6,7 @@
 		</div>
 		<el-scrollbar class="wrap-scroll">
 			<el-menu :collapse="appStore.isCollapse" :router="true" :default-active="activeMenu">
-				<SidebarItem v-for="item in combinedRoutes" :key="item.path" :item="item" :base-path="item.path"> </SidebarItem>
+				<SidebarItem v-for="item in allRoutes" :key="item.path" :item="item" :base-path="item.path"> </SidebarItem>
 			</el-menu>
 		</el-scrollbar>
 	</div>
@@ -16,7 +16,7 @@
 import SidebarItem from "./SideBarItem.vue";
 import useMenuStore from "@/store/modules/menu.ts";
 const menuStore = useMenuStore();
-const { combinedRoutes } = menuStore;
+const { allRoutes } = menuStore;
 const route = useRoute();
 const activeMenu = computed(() => {
 	return route.path;
