@@ -1,21 +1,25 @@
 <template>
-	<el-form :inline="true" :mode="searchForm">
-		<el-form-item label="用户名:">
-			<el-input v-model="searchForm.username"></el-input>
-		</el-form-item>
-		<el-form-item label="密码:">
-			<el-input></el-input>
-		</el-form-item>
-	</el-form>
+	<div class="user-container">
+		<el-form :inline="true" :model="searchForm">
+			<el-form-item label="用户名:">
+				<el-input v-model="searchForm.username"></el-input>
+			</el-form-item>
+			<el-form-item label="密码:">
+				<el-input v-model="searchForm.password"></el-input>
+			</el-form-item>
+		</el-form>
 
-	<el-table :data="tableData" style="width: 100%">
-		<el-table-column prop="date" label="Date" width="180" />
-		<el-table-column prop="name" label="Name" width="180" />
-		<el-table-column prop="address" label="Address" />
-	</el-table>
+		<el-table :data="tableData" style="width: 100%">
+			<el-table-column prop="date" label="Date" width="180" />
+			<el-table-column prop="name" label="Name" width="180" />
+			<el-table-column prop="address" label="Address" />
+		</el-table>
+	</div>
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue';
+
 const searchForm = reactive({
 	username: "",
 	password: ""

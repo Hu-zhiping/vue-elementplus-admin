@@ -1,43 +1,93 @@
 <template>
-	<div class="h-[100%] ransition-width duration-100 ease-linear border-solid border-r-[3px] border-gray-200 box-border">
-		<div class="h-[50px] text-black flex items-center justify-center">
-			<span v-if="appStore.isCollapse">A</span>
-			<span v-else>HelloAdmin</span>
-		</div>
-		<el-scrollbar class="wrap-scroll">
-			<el-menu :collapse="appStore.isCollapse" :router="true" :default-active="activeMenu">
-				<SidebarItem v-for="item in allRoutes" :key="item.path" :item="item" :base-path="item.path"> </SidebarItem>
-			</el-menu>
-		</el-scrollbar>
-	</div>
+  <aside class="sidebar" aria-label="侧边导航">
+    <!-- Logo区域 -->
+    <div class="sidebar__logo">
+      <span v-if="appStore.isCollapse" class="sidebar__logo-short">A</span>
+      <span v-else class="sidebar__logo-full">HelloAdmin</span>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <el-scrollbar class="sidebar__scrollbar">
+      <el-menu 
+        :collapse="appStore.isCollapse" 
+        :router="true" 
+        :default-active="activeMenu"
+        class="sidebar__menu"
+      >
+        <SidebarItem 
+          v-for="item in allRoutes" 
+          :key="item.path" 
+          :item="item" 
+          :base-path="item.path"
+        />
+      </el-menu>
+    </el-scrollbar>
+  </aside>
 </template>
 
 <script lang="ts" setup>
+// 组件导入
 import SidebarItem from "./SideBarItem.vue";
-import useMenuStore from "@/store/modules/menu.ts";
-const menuStore = useMenuStore();
-const { allRoutes } = menuStore;
+
+// Store导入
+import useMenuStore from "@/store/modules/menu";
+import useAppStore from "@/store/modules/app";
+
+// 路由
 const route = useRoute();
-const activeMenu = computed(() => {
-	return route.path;
-});
 
-import useAppStore from "@/store/modules/app.ts";
-
+// Store实例
+const menuStore = useMenuStore();
 const appStore = useAppStore();
+
+// 菜单数据
+const { allRoutes } = menuStore;
+
+// 计算当前激活的菜单项
+const activeMenu = computed(() => {
+  return route.path;
+});
 </script>
 
 <style lang="scss" scoped>
-.wrap-scroll {
-	height: calc(100vh - 50px);
-}
-
-// 添加以下样式以消除展开与折叠时的边框痕迹
-.el-menu {
-	border-right: none; // 移除右侧边框
-}
-
-.el-menu--collapse {
-	border-right: 3px solid transparent; // 折叠状态下的透明边框
+.sidebar {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-right: 1px solid var(--el-border-color-lighter);
+  box-sizing: border-box;
+  background-color: var(--el-bg-color-overlay);
+  
+  &__logo {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    overflow: hidden;
+    
+    &-short {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--el-color-primary);
+    }
+    
+    &-full {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--el-text-color-primary);
+    }
+  }
+  
+  &__scrollbar {
+    height: calc(100vh - 50px);
+  }
+  
+  &__menu {
+    border-right: none;
+    
+    &.el-menu--collapse {
+      border-right: none;
+    }
+  }
 }
 </style>
