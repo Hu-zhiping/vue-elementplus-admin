@@ -30,14 +30,14 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import SideBar from './SideBar/index.vue';
-import NavBar from './NavBar/index.vue';
-import TagsView from './components/TagsView/index.vue';
-import Footer from './components/Footer/index.vue';
-import Settings from './components/Settings/index.vue';
+import SideBar from '@/layout/components/SideBar/index.vue';
+import NavBar from '@/layout/components/NavBar/index.vue';
+import TagsView from '@/layout/components/TagsView/index.vue';
+import Footer from '@/layout/components/Footer/index.vue';
+import Settings from '@/layout/components/Settings/index.vue';
 import useMenuStore from "@/store/modules/menu";
 import useAppStore from "@/store/modules/app";
-import AppMain from './AppMain/index.vue';
+import AppMain from '@/layout/components/AppMain/index.vue';
 
 const appStore = useAppStore();
 const isCollapse = computed(() => appStore.isCollapse);

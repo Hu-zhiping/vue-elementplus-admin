@@ -1,3 +1,4 @@
+import router from "@/router";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 interface ApiConfig {
@@ -31,6 +32,10 @@ class Http {
 				const { code, msg } = response.data;
 				if (code && code == 200) {
 					return response.data;
+				}
+				// token过期
+				if (code === 401) {
+					router.push("/login?expired=1");
 				}
 				ElMessage.error(msg || "系统错误");
 				return Promise.reject(new Error(msg || "系统错误"));

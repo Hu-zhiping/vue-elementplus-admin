@@ -100,7 +100,7 @@ import { ElMessageBox } from 'element-plus'
 import { Expand, Fold, FullScreen, Aim, Search, RefreshRight, Bell, User, Setting, SwitchButton, Link} from '@element-plus/icons-vue'
 import useAppStore from "@/store/modules/app";
 import useUserStore from "@/store/modules/user";
-import Breadcrumb from './components/BreadCrumb.vue'
+import Breadcrumb from './BreadCrumb.vue'
 
 
 const router = useRouter()
@@ -196,7 +196,6 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    max-width: 1440px;
     margin: 0 auto;
     padding: $header-padding;
   }
