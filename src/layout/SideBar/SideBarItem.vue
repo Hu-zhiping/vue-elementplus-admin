@@ -20,7 +20,7 @@
       v-for="child in props.item.children" 
       :key="child.path" 
       :item="child" 
-      :base-path="props.item.path"
+      :base-path="resolvePath(props.basePath, props.item.path)"
     />
   </el-sub-menu>
 
@@ -39,7 +39,9 @@
   </el-menu-item>
 </template>
 
-<script lang="ts" setup>
+<script setup>
+import { computed } from 'vue'
+
 // 定义组件名称，用于递归引用
 defineOptions({
   name: 'SidebarItem'
@@ -79,7 +81,7 @@ const isHidden = computed(() =>
  * @param path 当前路径
  * @returns 完整路径
  */
-const resolvePath = (basePath: string, path: string): string => {
+const resolvePath = (basePath, path) => {
   // 如果是绝对路径，直接返回
   if (path.startsWith('/')) {
     return path;
@@ -102,11 +104,13 @@ const resolvePath = (basePath: string, path: string): string => {
     display: flex;
     align-items: center;
     width: 100%;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
   
   &__icon {
-    margin-right: 8px;
+    margin-right: 10px;
     font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
   
   &__text {
@@ -114,6 +118,8 @@ const resolvePath = (basePath: string, path: string): string => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-size: 14px;
   }
 }
 
@@ -124,6 +130,69 @@ const resolvePath = (basePath: string, path: string): string => {
     width: 100%;
     display: flex;
     align-items: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  &:hover {
+    background-color: rgba(22, 93, 255, 0.08);
+    border-radius: 0;
+  }
+
+  // 一级菜单悬停样式调整
+  :deep(.el-sub-menu__title) {
+    &:hover {
+      background-color: rgba(22, 93, 255, 0.1);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+  }
+  
+  &.is-active {
+    background-color: rgba(22, 93, 255, 0.05);
+    color: var(--el-color-primary);
+    border-radius: 0;
+    border-right: none;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background-color: var(--el-color-primary);
+      border-radius: 0;
+    }
+  }
+}
+
+// 子菜单样式
+:deep(.sidebar-submenu) {
+  .el-menu--popup {
+    padding: 8px 0;
+    min-width: 180px;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 
+                0 6px 16px 0 rgba(0, 0, 0, 0.08), 
+                0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    
+    .el-menu-item {
+      height: 40px;
+      line-height: 40px;
+      margin: 4px 8px;
+      padding: 0 16px !important;
+      border-radius: 4px;
+      
+      &.is-active {
+        background-color: var(--el-color-primary-light-9);
+        color: var(--el-color-primary);
+      }
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
   }
 }
 </style>

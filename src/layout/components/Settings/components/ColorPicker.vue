@@ -1,10 +1,8 @@
 <template>
-  <div class="color-picker">
-    <h3 class="color-picker__title">主题色设置</h3>
-    
-    <div class="color-picker__section">
-      <div class="color-picker__label">主题模式</div>
-      <div class="color-picker__theme-switch">
+  <div class="theme-picker">
+    <!-- 主题模式 -->
+    <div class="theme-picker__section">
+      <div class="theme-picker__theme-switch">
         <el-switch
           v-model="isDarkMode"
           @change="toggleDarkMode"
@@ -18,26 +16,24 @@
             <el-icon><Sunny /></el-icon>
           </template>
         </el-switch>
-        <span class="color-picker__theme-label">{{ isDarkMode ? '暗色模式' : '亮色模式' }}</span>
+        <span class="theme-picker__theme-label">{{ isDarkMode ? '暗色模式' : '亮色模式' }}</span>
       </div>
     </div>
     
-    <div class="color-picker__section">
-      <div class="color-picker__label">主题颜色</div>
-      <div class="color-picker__colors">
-        <div
-          v-for="(color, index) in presetColors"
-          :key="index"
-          class="color-picker__color-item"
-          :class="{ 'is-active': currentColor === color }"
-          :style="{ backgroundColor: color }"
-          @click="changeThemeColor(color)"
-        ></div>
-      </div>
+    <!-- 预设颜色 -->
+    <div class="theme-picker__colors">
+      <div
+        v-for="(color, index) in presetColors"
+        :key="index"
+        class="theme-picker__color-item"
+        :class="{ 'is-active': currentColor === color }"
+        :style="{ backgroundColor: color }"
+        @click="changeThemeColor(color)"
+      ></div>
     </div>
     
-    <div class="color-picker__section">
-      <div class="color-picker__label">自定义颜色</div>
+    <!-- 自定义颜色 -->
+    <div class="theme-picker__custom">
       <el-color-picker
         v-model="customColor"
         :predefine="presetColors"
@@ -46,35 +42,13 @@
         size="small"
       />
     </div>
-    
-    <div class="color-picker__section">
-      <div class="color-picker__label">界面设置</div>
-      <div class="color-picker__option">
-        <span>紧凑模式</span>
-        <el-switch v-model="isCompactMode" @change="toggleCompactMode" />
-      </div>
-      <div class="color-picker__option">
-        <span>固定头部</span>
-        <el-switch v-model="isFixedHeader" @change="toggleFixedHeader" />
-      </div>
-      <div class="color-picker__option">
-        <span>显示标签栏</span>
-        <el-switch v-model="showTabs" @change="toggleTabs" />
-      </div>
-    </div>
-    
-    <div class="color-picker__actions">
-      <el-button type="primary" @click="saveSettings">保存设置</el-button>
-      <el-button @click="resetSettings">恢复默认</el-button>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { ElMessage } from 'element-plus';
 import { Moon, Sunny } from '@element-plus/icons-vue';
-import useAppStore from '@/store/modules/app';
+import useAppStore from "@/store/modules/app";
 
 const appStore = useAppStore();
 
@@ -94,13 +68,9 @@ const presetColors = [
 const isDarkMode = ref(false);
 const currentColor = ref('#409EFF');
 const customColor = ref('#409EFF');
-const isCompactMode = ref(false);
-const isFixedHeader = ref(true);
-const showTabs = ref(true);
 
 // 初始化
 onMounted(() => {
-  // 从本地存储或状态管理中获取设置
   const savedTheme = localStorage.getItem('theme-mode');
   const savedColor = localStorage.getItem('theme-color');
   
@@ -110,11 +80,6 @@ onMounted(() => {
     customColor.value = savedColor;
     applyThemeColor(savedColor);
   }
-  
-  // 应用其他设置
-  isCompactMode.value = localStorage.getItem('compact-mode') === 'true';
-  isFixedHeader.value = localStorage.getItem('fixed-header') !== 'false';
-  showTabs.value = localStorage.getItem('show-tabs') !== 'false';
 });
 
 // 切换暗色模式
@@ -188,81 +153,30 @@ const darkenColor = (color: string, amount: number): string => {
     return color;
   }
 };
-
-// 切换紧凑模式
-const toggleCompactMode = (value: boolean) => {
-  document.documentElement.classList.toggle('compact-mode', value);
-  localStorage.setItem('compact-mode', value.toString());
-};
-
-// 切换固定头部
-const toggleFixedHeader = (value: boolean) => {
-  appStore.fixedHeader = value;
-  localStorage.setItem('fixed-header', value.toString());
-};
-
-// 切换标签栏显示
-const toggleTabs = (value: boolean) => {
-  appStore.showTabs = value;
-  localStorage.setItem('show-tabs', value.toString());
-};
-
-// 保存设置
-const saveSettings = () => {
-  // 可以添加保存到后端的逻辑
-  ElMessage.success('设置已保存');
-};
-
-// 重置设置
-const resetSettings = () => {
-  isDarkMode.value = false;
-  toggleDarkMode(false);
-  
-  currentColor.value = '#409EFF';
-  customColor.value = '#409EFF';
-  changeThemeColor('#409EFF');
-  
-  isCompactMode.value = false;
-  toggleCompactMode(false);
-  
-  isFixedHeader.value = true;
-  toggleFixedHeader(true);
-  
-  showTabs.value = true;
-  toggleTabs(true);
-  
-  ElMessage.success('已恢复默认设置');
-};
 </script>
 
 <style lang="scss" scoped>
-.color-picker {
-  padding: 16px;
-  
-  &__title {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--el-text-color-primary);
-  }
-  
+.theme-picker {
   &__section {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   
-  &__label {
-    margin-bottom: 12px;
+  &__theme-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  &__theme-label {
     font-size: 14px;
-    font-weight: 500;
-    color: var(--el-text-color-primary);
+    color: var(--el-text-color-regular);
   }
   
   &__colors {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
   
   &__color-item {
@@ -295,29 +209,8 @@ const resetSettings = () => {
     }
   }
   
-  &__theme-switch {
+  &__custom {
     display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  &__theme-label {
-    font-size: 14px;
-    color: var(--el-text-color-regular);
-  }
-  
-  &__option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: var(--el-text-color-regular);
-  }
-  
-  &__actions {
-    display: flex;
-    gap: 12px;
     justify-content: flex-end;
   }
 }
